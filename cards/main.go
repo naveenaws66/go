@@ -1,19 +1,11 @@
 package main
 
-import "fmt"
-
 // funtion with return
-// loop with range 	
+// loop with range
 // types
-// funtion with receiver 
+// funtion with receiver
 
 func main() {
-	var card = deck{"one", "two"}
-	fmt.Println(card)
-	lastcard()
+	cards := newDeck()
+	cards.print()
 }
-
-func lastcard() {
-	fmt.Println("lastcard")
-}
-
