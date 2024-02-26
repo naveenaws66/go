@@ -22,3 +22,7 @@ func newDeck() deck {
 	}
 	return cards
 }
+
+func deal(d deck, dealSize int) (deck, deck) {
+	return d[:dealSize], d[dealSize:]
+}
