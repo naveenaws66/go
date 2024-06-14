@@ -24,8 +24,8 @@ func (s square) getArea() float64 {
 
 func printArea(s shape) {
 	fmt.Println(s)
-	area := s.getArea()
-	fmt.Println(area)
+	fmt.Println(s.getArea())
+	//fmt.Println(area)
 }
 
 func main() {
