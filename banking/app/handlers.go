@@ -3,8 +3,9 @@ package app
 import (
 	"encoding/json"
 	"encoding/xml"
-	"fmt"
 	"net/http"
+
+	"github.com/naveenaws66/banking/service"
 )
 
 type Customer struct {
@@ -13,15 +14,12 @@ type Customer struct {
 	Zipcode string `json:"zipcity"`
 }
 
-func greet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello World")
+type CustomerHandlers struct {
+	service service.CustomerService
 }
 
-func getAllCusomers(w http.ResponseWriter, r *http.Request) {
-	customers := []Customer{
-		{Name: "person1", City: "city1", Zipcode: "1"},
-		{Name: "person2", City: "city2", Zipcode: "2"},
-	}
+func (ch *CustomerHandlers) getAllCusomers(w http.ResponseWriter, r *http.Request) {
+	customers, _ := ch.service.GetAllCustomer()
 
 	if w.Header().Get("Content-Type") == "application/xml" {
 		w.Header().Add("Content-Type", "application/xml")
