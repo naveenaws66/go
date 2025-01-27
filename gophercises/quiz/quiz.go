@@ -3,15 +3,20 @@ package main
 import (
 	"encoding/csv"
 	"flag"
-	"fmt"
 	"os"
+	"fmt"
 )
+
+//type problem struct {
+	//q string
+	//a string
+//}
 
 func main() {
 
-	filePath := flag.String("filename", "random", "filepath obsolute path")
+	filePath := flag.String("filename", "problem.csv", "path to csv file with question and answers")
 	flag.Parse()
-	//fmt.Println(*filePath)
+
 	f, err := os.Open(*filePath)
 
 	if err != nil {
@@ -24,9 +29,21 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	correct := 0
+	
 	for i := range lines {
-		fmt.Println("Problem: ", lines[i][0])
-		fmt.Println("answer: ", lines[i][1])
-	}
+	 	fmt.Printf("Problem: #%d: %s = \n", i+1, lines[i][0])
+		var answer string
+		fmt.Scanf("%s\n", &answer)
+		if lines[i][1] == answer {
+			//fmt.Println("Correct answer")
+			correct++
+		}
+
+//		if i == 2 {
+//			break
+//		}
+	 }
+	 fmt.Printf("Score %d out of %d \n", correct, len(lines))
+
 }
