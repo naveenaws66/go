@@ -2,6 +2,8 @@ package urlshortener
 
 import (
 	"net/http"
+
+	yaml "gopkg.in/yaml.v2"
 )
 
 func MapHandler(pathsToUrls map[string]string, fallback http.Handler) http.HandlerFunc {
@@ -24,7 +26,7 @@ func YAMLHandler(yamlBytes []byte, fallback http.Handler) (http.HandlerFunc, err
 	return MapHandler(pathsToUrls, fallback), nil
 }
 
-func buildMap(PathUrls []pathUrl) map[string]string {
+func buildMap(pathUrls []pathUrl) map[string]string {
 	pathToUrls := make(map[string]string)
 	for _, pu := range pathUrls {
 		pathToUrls[pu.Path] = pu.URL
@@ -43,6 +45,5 @@ func parseYaml(data []byte) ([]pathUrl, error) {
 
 type pathUrl struct {
 	Path string `yaml:"path"`
-	URL string `yaml:"url"`
+	URL  string `yaml:"url"`
 }
-
